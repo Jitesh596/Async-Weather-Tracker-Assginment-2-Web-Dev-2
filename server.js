@@ -9,12 +9,13 @@ form.addEventListener('submit', async(e) => {
   
   const WeatherData = await responce.json(); 
   console.log(WeatherData); 
+
   weatherInfo.innerHTML = `<
-                <p>City: ${WeatherData.name}</p>
-                <p>Temp: ${(WeatherData.main.temp-273).toFixed(1)}C</p>
-                <p>Weather: ${WeatherData.weather[0].main}</p>
-                <p>Humidity: ${WeatherData.main.humidity}%</p>
-                <p>Wind Speed: ${WeatherData.wind.speed} m/s</p>`;
+              <p>City: ${WeatherData.name}</p>
+              <p>Temp: ${(WeatherData.main.temp-273).toFixed(1)}C</p>
+              <p>Weather: ${WeatherData.weather[0].main}</p>
+              <p>Humidity: ${WeatherData.main.humidity}%</p>
+              <p>Wind Speed: ${WeatherData.wind.speed} m/s</p>`;
    console.log("City", WeatherData.name);
    console.log("Temperature", (WeatherData.main.temp-273).toFixed(1), "C");
    console.log("Weather", WeatherData.weather[0].main);
