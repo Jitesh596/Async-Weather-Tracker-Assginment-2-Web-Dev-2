@@ -27,7 +27,7 @@ body {
   min-height: 240px;
 }
 
-.search-box {
+#weather-form {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
