@@ -21,4 +21,4 @@ form.addEventListener('submit', async(e) => {
    console.log("Weather", WeatherData.weather[0].main);
    console.log("Humidity", WeatherData.main.humidity);
    console.log("Wind", WeatherData.wind.speed, "m/s");
-});
+}); 
