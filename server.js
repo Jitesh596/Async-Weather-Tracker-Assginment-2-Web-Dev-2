@@ -4,6 +4,7 @@ const form = document.querySelector('#weather-form');
 const weatherInfo = document.querySelector("#weatherBox");
 const cityInput = document.querySelector("#city");
 const history = document.querySelector("#history");
+const consoleBox = document.querySelector("#consoleBox");
 
 let historydata = JSON.parse(localStorage.getItem("history")) || [];
 
@@ -75,3 +76,7 @@ function showHistory() {
 showHistory();
 
 
+function log(message) {
+    consoleBox.innerHTML += message + "<br>";
+    consoleBox.scrollTop = consoleBox.scrollHeight;
+}
