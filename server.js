@@ -1,32 +1,77 @@
 const API_KEY = "0133cc5316757ac730cc46ae342334e4";
 
-const form = document.querySelector('#weather-form'); 
+const form = document.querySelector('#weather-form');
 const weatherInfo = document.querySelector("#weatherBox");
-const city = document.querySelector("#city");
-const consoleBox = document.querySelector("#consoleBox");
+const cityInput = document.querySelector("#city");
+const history = document.querySelector("#history");
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+let historydata = JSON.parse(localStorage.getItem("history")) || [];
 
-    const data = city.value;
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-    try {
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=${API_KEY}`
-        );
+  const data = cityInput.value.trim();
 
-        const weatherData = await response.json();
-
-        weatherInfo.innerHTML = `
-            <p><strong>City:</strong> ${weatherData.name}</p>
-            <p><strong>Temperature:</strong> ${(weatherData.main.temp - 273.15).toFixed(1)} °C</p>
-            <p><strong>Weather:</strong> ${weatherData.weather[0].main}</p>
-            <p><strong>Humidity:</strong> ${weatherData.main.humidity}%</p>
-            <p><strong>Wind:</strong> ${weatherData.wind.speed} m/s</p>
-        `;
-
-    } catch (error) {
-        weatherInfo.innerHTML = "City not found!";
-        console.log("Error:", error);
-    }
+  if (data) {
+    getData(data);
+  } else {
+    weatherInfo.innerHTML = `<p>Please enter a city name.</p>`;
+  }
 });
+
+
+async function getData(data) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=${API_KEY}`
+    );
+
+    const WeatherData = await response.json();
+    console.log(WeatherData);
+
+    if (WeatherData.cod === "404") {
+      weatherInfo.innerHTML = `<p>City not found. Please try again.</p>`;
+    } else {
+      weatherInfo.innerHTML = `
+        <p><strong>City:</strong> ${WeatherData.name}</p>
+        <p><strong>Temperature:</strong> ${(WeatherData.main.temp - 273.15).toFixed(1)} °C</p>
+        <p><strong>Weather:</strong> ${WeatherData.weather[0].main}</p>
+        <p><strong>Humidity:</strong> ${WeatherData.main.humidity}%</p>
+        <p><strong>Wind:</strong> ${WeatherData.wind.speed} m/s</p>
+      `;
+
+      if (historydata.includes(data) == false) {
+        historydata.push(data);
+        localStorage.setItem("history", JSON.stringify(historydata));
+      }
+    }
+
+    showHistory();
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+function showHistory() {
+  history.innerHTML = "";
+
+  if (localStorage.getItem("history")) {
+    historydata = JSON.parse(localStorage.getItem("history"));
+
+    historydata.forEach((ele) => {
+      const li = document.createElement("button");
+      li.textContent = ele;
+      history.appendChild(li);
+
+      li.addEventListener("click", () => {
+        getData(ele);
+      });
+    });
+  }
+}
+
+showHistory();
+
+
