@@ -1,7 +1,7 @@
-🌤 Async Weather Tracker
+🌤 #Async Weather Tracker
 
 
-🚀 Features
+🚀 ##Features
 
 🔍 Search weather by city name
 
@@ -17,7 +17,7 @@
 
 🧠 Displays Event Loop console logs (sync, microtask, macrotask)
 
-🛠 Tech Stack
+🛠 ##Tech Stack
 
 HTML5
 
