@@ -107,4 +107,17 @@ localStorage.setItem("history", JSON.stringify(historydata));
 showHistory();
 
 
+
+
+
+
+
+
+
+
+
+historydata = [];
+localStorage.setItem("history", JSON.stringify(historydata));
+showHistory();
+
 clearTimeout
