@@ -149,4 +149,20 @@ clearTimeoutistorydata = [];
 localStorage.setItem("history", JSON.stringify(historydata));
 showHistory();
 
+clearTimeoutistorydata = [];
+localStorage.setItem("history", JSON.stringify(historydata));
+showHistory();
+
+clearTimeoutistorydata = [];
+localStorage.setItem("history", JSON.stringify(historydata));
+showHistory();
+
+clearTimeoutistorydata = [];
+localStorage.setItem("history", JSON.stringify(historydata));
+showHistory();
+
+clearTimeoutistorydata = [];
+localStorage.setItem("history", JSON.stringify(historydata));
+showHistory();
+
 clearTimeout
